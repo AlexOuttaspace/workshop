@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Simple XHR</title>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+  <nav>
+    <a href="/">Go to main page</a> |
+    <a href="/xhr/index.html">Reset</a>
+  </nav>
+
+  <main>
+    <div id='counter'></div>
+    <div class='buttons'>
+      <button id='async'>Load data (async)</button>
+      <button id='sync'>Load data (sync)</button>
+      <button id='state'>XHR state</button>
+    </div>
+    <section id='content'></section>
+  </main>
+
+  <script src="./async.js" type="text/javascript"></script>
+  <script src="./sync.js" type="text/javascript"></script>
+  <script src="./state.js" type="text/javascript"></script>
+  <script src="./utils.js" type="text/javascript"></script>
+</body>
+
+</html>

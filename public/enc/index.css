@@ -1,0 +1,25 @@
+a {
+  margin: 20px;
+}
+
+#form {
+  margin: auto;
+  display: flex;
+  align-items: flex-end;
+}
+
+#form label {
+  display: block;
+  font-size: 18px;
+}
+
+#form input {
+  outline: none;
+  font-size: 18px;
+  width: 250px;
+  padding: 15px 10px;
+}
+
+#form input:hover {
+  outline: none;
+}

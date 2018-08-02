@@ -1,0 +1,15 @@
+{
+  "name": "client-server-workshop",
+  "version": "1.0.0",
+  "description": "Examples of client-server communication",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Alexander Pomazan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {}
+}
