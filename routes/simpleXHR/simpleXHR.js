@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const path = require('path')
+const multer = require('multer')
+const upload = multer()
 
 const sleep = require('../../sleep')
 
@@ -23,9 +25,16 @@ router.get('/showState', async (req, res) => {
   }
 })
 
-router.get('/encription', (req, res) => {
-  console.log(req.query)
-  res.status(200).send()
+router.get('/encription/urlencoded', (req, res) => {
+  res.status(200).send(req.query)
+})
+
+router.post('/encription/urlencoded', (req, res) => {
+  res.status(200).send(req.body)
+})
+
+router.post('/encription/multipart-formdata', upload.array(), (req, res) => {
+  res.status(200).send(req.body)
 })
 
 

@@ -6,16 +6,13 @@ a {
   margin: auto;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 #form label {
   display: block;
   font-size: 18px;
   width: 300px;
-}
-
-#form input, #form select {
   height: 51px;
   outline: none;
   background: none;
@@ -23,8 +20,20 @@ a {
   font-size: 18px;
   
   padding: 15px 10px;
-  border: 1px solid grey;
-  border-radius: 5px;
+  border: 1px dashed grey;
+
+  cursor: pointer;
+  text-align: center;
+}
+
+#form label:hover {
+  background-color: #eee;
+}
+
+#form input {
+  visibility: hidden;
+  width:0px;
+  height:0px;
 }
 
 #form button {
@@ -32,11 +41,10 @@ a {
   height: 51px;
   background: none;
   outline: none;
-  flex: 1 1 300px;
+  flex: 0 1 100px;
   padding: 15px 10px;
   font-size: 18px;
   border: 1px solid grey;
-  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -50,4 +58,29 @@ a {
 
 #form input:hover {
   outline: none;
+}
+
+#progress-bar {
+  width: 200px;
+  height: 40px;
+  border: 1px solid greenyellow;
+  margin: 20px auto;
+  position: relative;
+}
+
+#loaded {
+  z-index: -10;
+  height: 100%;
+  width: 0%;
+  background-color: greenyellow;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#percentage {
+  height: 100%;
+  line-height: 40px;
+  text-align: center;
+  width: 100%;
 }

@@ -18,21 +18,26 @@
 
   <main>
     <form id='form'>
-      <label> Name:
-        <input type="text" value="Хидео">
+      <label> First name:
+        <input name='firstname' type="text" value="Хидео">
       </label>
-      <label> Surname:
-        <input type="text" value="Кодзима">
+      <label> Last name:
+        <input name='lastname' type="text" value="Кодзима">
       </label>
       <label>
-        <select>
+        Request Type
+        <select name='encoding'>
           <option value="GET/urlencoded">GET with urlencoded</option>
           <option value="POST/urlencoded">POST with urlencoded</option>
-          <option value="POST/urlencoded">POST with urlencoded</option>
+          <option value="POST/multipart" selected>POST with multipart/form-data</option>
+          <option value="POST/FormData">POST with FormData</option>
         </select>
       </label>
+      <button>Submit</button>
     </form>
   </main>
+
+  <script src='./index.js' type='text/javascript'></script>
 </body>
 
 </html>

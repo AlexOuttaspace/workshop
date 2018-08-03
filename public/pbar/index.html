@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Encoding</title>
+  <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <nav>
+    <a href="/">Go to main page</a> |
+    <a href="/pbar/index.html">Reset</a>
+  </nav>
+
+  <main>
+    <form id='form'>
+      <label id='upload'> Upload file
+        <input type="file" name="file" id='file'>
+      </label>
+      <button>Submit</button>
+    </form>
+    <div id='progress-bar'>
+      <div id='loaded'></div>
+      <div id='percentage'></div>
+    </div>
+  </main>
+
+  <script src='./index.js' type='text/javascript'></script>
+</body>
+
+</html>
