@@ -20,7 +20,7 @@ class Uploader {
 
     this.xhrStatus.onload = this.xhrStatus.onerror = () => {
       if (this.xhrStatus.status == 200) {
-        this.startByte = +this.xhrStatus.responseText || 0;
+        this.startByte = +this.xhrStatus.responseText;
         console.log("upload: startByte=" + this.startByte);
         this.send();
         return;
@@ -40,6 +40,9 @@ class Uploader {
 
   send() {
     this.xhrUpload = new XMLHttpRequest();
+
+
+
     this.xhrUpload.onload = this.xhrUpload.onerror = () => {
       console.log("upload end status:" + this.xhrUpload.status + " text:" + this.xhrUpload.statusText);
 
@@ -58,6 +61,7 @@ class Uploader {
     this.xhrUpload.open("POST", "/xhr/renewable/upload", true);
 
     this.xhrUpload.setRequestHeader('X-File-Id', this.fileId);
+    this.xhrUpload.setRequestHeader('X-start-byte', this.startByte);
 
     this.xhrUpload.upload.onprogress = e => {
       this.errorCount = 0;
