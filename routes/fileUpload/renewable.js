@@ -7,7 +7,7 @@ router.post('/renewable/upload', (req, res) => {
   const fileId = req.headers['x-file-id'];
   const startByte = req.headers['x-start-byte'];
 
-  console.log(1, fileId, startByte)
+
 
   if (!fileId) {
     res.writeHead(400, "No file id");
@@ -74,11 +74,14 @@ router.get('/renewable/status', (req, res) => {
   const fileId = req.headers['x-file-id'];
   const upload = uploads[fileId] || null;
   console.log("onStatus fileId:", fileId, " upload:", upload);
+  console.log('#################')
+  console.log('uploads:', uploads)
   if (!upload) {
     res.end("0")
   } else {
     res.end(String(upload.bytesReceived));
   }
+
 })
 
 
