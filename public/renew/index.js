@@ -1,35 +1,116 @@
+class Uploader {
+  constructor(file, onSuccess, onError, onProgress) {
+    this.file = file
+    this.fileId = hashCode(file.name + '-' + file.size + '-' + +file.lastModifiedDate);
 
-const handleSubmit = e => {
-  e.preventDefault();
-  const formData = new FormData(e.target)
-  const xhr = new XMLHttpRequest();
+    this.errors = 0;
+    this.startByte = 0;
 
-  xhr.upload.onprogress = function (event) {
-    showProgress(event.loaded / event.total);
+    this.xhrStatusUpload = null;
+    this.xhrStatus = null;
+
+    this.onSuccess = onSuccess;
+    this.onError = onError;
+    this.onProgress = onProgress;
+    this.MAX_ERROR_COUNT = 5;
   }
 
-  xhr.onload = xhr.onerror = function () {
-    if (this.status == 200 || this.status === 304) {
-      alert(this.responseText);
-    } else {
-      alert("error " + this.status);
+  upload() {
+    this.xhrStatus = new XMLHttpRequest();
+
+    this.xhrStatus.onload = this.xhrStatus.onerror = () => {
+      if (this.xhrStatus.status == 200) {
+        this.startByte = +this.xhrStatus.responseText || 0;
+        console.log("upload: startByte=" + this.startByte);
+        this.send();
+        return;
+      }
+
+      if (this.errorCount++ < this.MAX_ERROR_COUNT) {
+        setTimeout(this.upload, 1000 * this.errorCount); // через 1 сек пробуем ещё раз
+      } else {
+        this.onError(this.xhrStatus.statusText);
+      }
     }
-  };
 
-  xhr.open("POST", "/xhr/upload", true);
+    this.xhrStatus.open("GET", "/xhr/renewable/status", true);
+    this.xhrStatus.setRequestHeader('X-File-Id', this.fileId);
+    this.xhrStatus.send();
+  }
 
-  xhr.send(formData);
+  send() {
+    this.xhrUpload = new XMLHttpRequest();
+    this.xhrUpload.onload = this.xhrUpload.onerror = () => {
+      console.log("upload end status:" + this.xhrUpload.status + " text:" + this.xhrUpload.statusText);
+
+      if (this.xhrUpload.status == 200) {
+        onSuccess();
+        return;
+      }
+
+      if (this.errorCount++ < this.MAX_ERROR_COUNT) {
+        setTimeout(this.resume, 1000 * this.errorCount);
+      } else {
+        onError(this.xhrUpload.statusText);
+      }
+    }
+
+    this.xhrUpload.open("POST", "/xhr/renewable/upload", true);
+
+    this.xhrUpload.setRequestHeader('X-File-Id', this.fileId);
+
+    this.xhrUpload.upload.onprogress = e => {
+      this.errorCount = 0;
+      onProgress((this.startByte + e.loaded) / (this.startByte + e.total));
+    }
+
+    this.xhrUpload.send(this.file.slice(this.startByte));
+  }
+
+  pause() {
+    this.xhrStatus && this.xhrStatus.abort();
+    this.xhrUpload && this.xhrUpload.abort();
+  }
 }
 
-const showProgress = ratio => {
-  console.log(ratio)
+const onProgress = ratio => {
   const currentPercentage = (ratio * 100).toFixed(2) + '%'
   document.getElementById('percentage').textContent = currentPercentage
   document.getElementById('loaded').style.width = currentPercentage
 }
 
+const hashCode = str => {
+  if (str.length == 0) return 0;
+  let hash = 0,
+    i, chr;
+  for (i = 0; i < str.length; i++) {
+    chr = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0;
+  }
+  return hash;
+};
 
+const onSuccess = () => {
+  alert('File uploaded')
+}
+
+const onError = () => {
+  alert('Error occured')
+}
+
+const handleSubmit = e => {
+  e.preventDefault();
+  const file = document.getElementById('file').files[0]
+  const uploader = new Uploader(file, onSuccess, onError, onProgress)
+  uploader.upload()
+
+  stopButton.addEventListener('click', uploader.pause.bind(uploader))
+}
+
+const stopButton = document.getElementById('stop')
 const form = document.getElementById('form')
-const input = document.querySelector('input[type="file"]')
+
 
 form.addEventListener('submit', handleSubmit, false)
+

@@ -6,6 +6,7 @@ require('./anotherServer')
 
 const simpleXHR = require('./routes/simpleXHR/simpleXHR')
 const fileUpload = require('./routes/fileUpload/fileUpload')
+const renewableUpload = require('./routes/fileUpload/renewable')
 
 const PORT = process.env.PORT || 3000
 
@@ -21,6 +22,7 @@ app.get('/', (req, res) => {
 
 app.use('/xhr', simpleXHR)
 app.use('/xhr', fileUpload)
+app.use('/xhr', renewableUpload)
 
 
 app.listen(PORT, () => {

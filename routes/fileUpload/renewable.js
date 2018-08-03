@@ -7,6 +7,8 @@ router.post('/renewable/upload', (req, res) => {
   const fileId = req.headers['x-file-id'];
   const startByte = req.headers['x-start-byte'];
 
+  console.log(1, fileId, startByte)
+
   if (!fileId) {
     res.writeHead(400, "No file id");
     res.end();
@@ -42,6 +44,7 @@ router.post('/renewable/upload', (req, res) => {
 
   req.on('data', function (data) {
     upload.bytesReceived += data.length;
+    console.log(upload)
   });
 
   req.pipe(fileStream);
@@ -67,14 +70,15 @@ router.post('/renewable/upload', (req, res) => {
   });
 })
 
-router.post('/renewable/status', (req, res) => {
-  let length = 0;
-  req.on('data', (chunk) => {
-    length += chunk.length;
-    console.log('KBytes uploaded:', length / 1024)
-  }).on('end', function () {
-    res.send('file uploaded');
-  });
+router.get('/renewable/status', (req, res) => {
+  const fileId = req.headers['x-file-id'];
+  const upload = uploads[fileId] || null;
+  console.log("onStatus fileId:", fileId, " upload:", upload);
+  if (!upload) {
+    res.end("0")
+  } else {
+    res.end(String(upload.bytesReceived));
+  }
 })
 
 
