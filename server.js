@@ -2,7 +2,6 @@ const path = require('path')
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-require('./anotherServer')
 
 const simpleXHR = require('./routes/simpleXHR/simpleXHR')
 const fileUpload = require('./routes/fileUpload/fileUpload')
@@ -28,3 +27,5 @@ app.use('/xhr', renewableUpload)
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`)
 })
+
+require('./anotherServer')
