@@ -28,8 +28,9 @@ app.get('/jsonp', (req, res) => {
   const json = fs.readFileSync('example.json').toString('utf8')
 
   const jsonWithCallback = `${callback}(${json})`
-
-  res.status(200).send(jsonWithCallback)
+  //console.log(jsonWithCallback)
+  res.status(200).write(jsonWithCallback)
+  res.end()
 })
 
 app.listen(PORT, () => {

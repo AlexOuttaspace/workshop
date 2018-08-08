@@ -2,32 +2,7 @@ a {
   margin: 20px;
 }
 
-#form {
-  margin: auto;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-#form label {
-  display: block;
-  font-size: 18px;
-  width: 300px;
-}
-
-#form input, #form select {
-  height: 51px;
-  outline: none;
-  background: none;
-  box-sizing: border-box;
-  font-size: 18px;
-  
-  padding: 15px 10px;
-  border: 1px solid grey;
-  border-radius: 5px;
-}
-
-#form button {
+button {
   margin-left: 50px;
   height: 51px;
   background: none;
@@ -36,18 +11,17 @@ a {
   padding: 15px 10px;
   font-size: 18px;
   border: 1px solid grey;
-  border-radius: 5px;
   cursor: pointer;
 }
 
-#form button:hover {
+button:hover {
   background-color: #eee;
 }
 
-#form button:active {
+button:active {
   background-color: #ddd;
 }
 
-#form input:hover {
+ input:hover {
   outline: none;
 }
