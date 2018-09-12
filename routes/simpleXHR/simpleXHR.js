@@ -37,7 +37,4 @@ router.post('/encription/multipart-formdata', upload.array(), (req, res) => {
   res.status(200).send(req.body)
 })
 
-
-
-
 module.exports = router;

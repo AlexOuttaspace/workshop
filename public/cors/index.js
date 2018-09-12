@@ -1,11 +1,9 @@
-const makeRequest = (url, isComplex) => {
+const makeRequest = (url) => {
   const xhr = new XMLHttpRequest()
 
   xhr.open('GET', url, true)
 
-  if (isComplex) {
-    xhr.setRequestHeader('Authorization', 'Kapacuk')
-  }
+  xhr.setRequestHeader('Authorization', 'Kapacuk')
 
   xhr.onreadystatechange = function () {
 
@@ -22,14 +20,9 @@ const makeRequest = (url, isComplex) => {
   xhr.send()
 }
 
-
-const corsSimple = document.getElementById('cors-simple')
-const corsComplex = document.getElementById('cors-complex')
+const cors = document.getElementById('cors')
 const noCors = document.getElementById('no-cors')
 
 
-corsSimple.addEventListener('click', () => makeRequest('http://localhost:3001/cors', false))
-corsComplex.addEventListener('click', () => makeRequest('http://localhost:3001/cors', true))
-noCors.addEventListener('click', () => makeRequest('http://localhost:3001/no-cors', true))
-
-
+cors.addEventListener('click', () => makeRequest('http://localhost:3001/cors'))
+noCors.addEventListener('click', () => makeRequest('http://localhost:3001/no-cors'))

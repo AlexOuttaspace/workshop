@@ -10,7 +10,7 @@ const getDataAsync = () => {
 
     if (this.readyState !== 4) return;
 
-    if (this.status !== 200 && this.status !== 304) {
+    if (this.status !== 200) {
       content.textContent = `Error occured: ${this.status} ${this.statusText}`
       return
     }
