@@ -10,14 +10,14 @@ form.addEventListener('submit', e => {
     name: name.value
   }
 
-  socket.send(outgoingMessage);
-  return false;
-})
+  socket.send(JSON.stringify(outgoingMessage));
+}, false)
 
 const socket = new WebSocket("ws://localhost:3002");
 
 socket.onmessage = e => {
-  const incomingMessage = event.data;
+
+  const incomingMessage = JSON.parse(e.data);
   showMessage(incomingMessage);
 };
 

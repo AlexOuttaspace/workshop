@@ -18,6 +18,10 @@ a {
   flex: 1 0 auto;
 }
 
+.messages p {
+  margin: 10px 5px;
+}
+
 .new-message {
   flex: 0 0 auto;
   box-sizing: border-box;

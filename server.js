@@ -38,7 +38,7 @@ require('./websocket')
 // Fetch _only in presentation
 // Кросс-доменные запросы _done
 // COMET _only in presentation
-// Long calls
+// Long calls ?
 // Server-Side Events
-// WebSocket
+// WebSocket _done
 // IFRAME
