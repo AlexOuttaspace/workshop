@@ -107,7 +107,7 @@ const postMP = (data) => {
 
 
 const postMPFormData = (data) => {
-  const formData = new FormData(document.forms.person);
+  const formData = new FormData(document.getElementById('form'));
 
   const xhr = new XMLHttpRequest();
 

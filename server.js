@@ -1,4 +1,5 @@
 const path = require('path')
+
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -28,4 +29,16 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`)
 })
 
-require('./anotherServer')
+// require('./anotherServer')
+require('./websocket')
+
+
+// HTTP-запрос  _done
+// AJAX _done
+// Fetch _only in presentation
+// Кросс-доменные запросы _done
+// COMET _only in presentation
+// Long calls
+// Server-Side Events
+// WebSocket
+// IFRAME
