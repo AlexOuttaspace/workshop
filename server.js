@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const simpleXHR = require('./routes/simpleXHR/simpleXHR')
 const fileUpload = require('./routes/fileUpload/fileUpload')
 const renewableUpload = require('./routes/fileUpload/renewable')
+const serverSentEvents = require('./routes/serverSentEvents/sse')
 
 const PORT = process.env.PORT || 3000
 
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 app.use('/xhr', simpleXHR)
 app.use('/xhr', fileUpload)
 app.use('/xhr', renewableUpload)
+app.use('/sse', serverSentEvents)
 
 
 app.listen(PORT, () => {
